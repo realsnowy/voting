@@ -1,0 +1,11 @@
+name: voting
+version: ${project.version}
+main: tf.justdisablevac.voting.main
+api-version: 1.13
+authors: [snowy]
+
+commands:
+  day:
+    usage: /day
+  sun:
+    usage: /sun
