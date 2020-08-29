@@ -3,33 +3,30 @@ package tf.justdisablevac.voting.listeners;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import tf.justdisablevac.voting.main;
+import tf.justdisablevac.voting.CooldownManager;
+import tf.justdisablevac.voting.backbone;
 
 public class onJoin implements Listener {
+
+    private final CooldownManager cooldownManager = new CooldownManager();
+    private final backbone backbone = new backbone();
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         String playerName = event.getPlayer().getName();
-        Integer onlinePlayers = main.plugin.config.getInt("onlinePlayers");
 
-        Integer remainingPlayersDay = main.plugin.config.getInt("day.remainingPlayers");
-        Integer remainingPlayersSun = main.plugin.config.getInt("sun.remainingPlayers");
+        if(cooldownManager.getCooldownDay(playerName)) {
+            backbone.increaseOnlinePlayers();
+            backbone.increaseRemainingPlayersSun();
 
-        if(main.plugin.config.getBoolean("players.day." + playerName)) {
-            main.plugin.config.set("onlinePlayers", onlinePlayers + 1);
-            main.plugin.saveConfig();
-
-        } else if(main.plugin.config.getBoolean("players.sun." + playerName)) {
-            main.plugin.config.set("onlinePlayers", onlinePlayers + 1);
-            main.plugin.saveConfig();
+        } else if(cooldownManager.getCooldownSun(playerName)) {
+            backbone.increaseOnlinePlayers();
+            backbone.increaseRemainingPlayersDay();
 
         } else {
-            main.plugin.config.set("onlinePlayers", onlinePlayers + 1);
-
-            main.plugin.config.set("day.remainingPlayers", remainingPlayersDay + 1);
-            main.plugin.config.set("sun.remainingPlayers", remainingPlayersSun + 1);
-
-            main.plugin.saveConfig();
+            backbone.increaseOnlinePlayers();
+            backbone.increaseRemainingPlayersDay();
+            backbone.increaseRemainingPlayersSun();
         }
     }
 }

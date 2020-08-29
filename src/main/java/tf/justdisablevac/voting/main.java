@@ -13,6 +13,9 @@ public final class main extends JavaPlugin {
     public FileConfiguration config;
     public static main plugin;
 
+    private final CooldownManager cooldownManager = new CooldownManager();
+    private final backbone backbone = new backbone();
+
     @Override
     public void onEnable() {
         plugin = this;
@@ -24,13 +27,9 @@ public final class main extends JavaPlugin {
         this.getCommand("day").setExecutor(new day());
         this.getCommand("sun").setExecutor(new sun());
 
-        Integer onlinePlayers = Bukkit.getOnlinePlayers().size();
-        main.plugin.config.set("onlinePlayers", onlinePlayers);
-        main.plugin.config.set("day.remainingPlayers", onlinePlayers);
-        main.plugin.config.set("sun.remainingPlayers", onlinePlayers);
-
-        main.plugin.config.set("players", null);
-
-        main.plugin.saveConfig();
+        backbone.resetOnlinePlayers();
+        backbone.resetRemainingPlayersDay();
+        backbone.resetRemainingPlayersSun();
+        cooldownManager.resetCooldowns();
     }
 }
