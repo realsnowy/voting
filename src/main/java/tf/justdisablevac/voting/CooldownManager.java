@@ -22,4 +22,7 @@ public class CooldownManager {
     public boolean getCooldownSun(String player) {
         return main.plugin.config.getBoolean("players.sun." + player, false);
     }
+    public boolean getCooldowns() {
+        return main.plugin.config.isSet("players");
+    }
 }

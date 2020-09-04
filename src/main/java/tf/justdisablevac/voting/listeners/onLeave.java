@@ -31,23 +31,23 @@ public class onLeave implements Listener {
             backbone.decreaseRemainingPlayersSun();
         }
 
+        if(cooldownManager.getCooldowns()) {
+            if(backbone.getRemainingPlayersDay().equals(0)) {
+                Bukkit.getWorld("world").setTime(1000);
+                Bukkit.broadcastMessage("§aSay hello to the new day on §2world");
 
-        if(main.plugin.config.get("day.remainingPlayers").equals(0)) {
-            Bukkit.getWorld("world").setTime(1000);
-            Bukkit.broadcastMessage("§aSay hello to the new day on §2world");
+                backbone.resetOnlinePlayers();
+                backbone.resetRemainingPlayersDay();
+                cooldownManager.resetCooldowns();
 
-            backbone.resetOnlinePlayers();
-            backbone.resetRemainingPlayersSun();
-            cooldownManager.resetCooldowns();
-        }
+            } if(backbone.getRemainingPlayersSun().equals(0)) {
+                Bukkit.getWorld("world").setStorm(false);
+                Bukkit.broadcastMessage("§aSay hello to the sun on §2world");
 
-        if(main.plugin.config.get("sun.remainingPlayers").equals(0)) {
-            Bukkit.getWorld("world").setStorm(false);
-            Bukkit.broadcastMessage("§aSay hello to the sun on §2world");
-
-            backbone.resetOnlinePlayers();
-            backbone.resetRemainingPlayersSun();
-            cooldownManager.resetCooldowns();
+                backbone.resetOnlinePlayers();
+                backbone.resetRemainingPlayersSun();
+                cooldownManager.resetCooldowns();
+            }
         }
     }
 }

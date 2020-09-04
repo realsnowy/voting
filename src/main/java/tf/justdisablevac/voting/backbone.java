@@ -17,7 +17,15 @@ public class backbone {
         main.plugin.saveConfig();
     }
     public Integer getOnlinePlayers() {
-        return Bukkit.getOnlinePlayers().size();
+        Bukkit.getScheduler().runTaskLater(main.plugin, new Runnable() {
+            @Override
+            public void run() {
+                Integer players = Bukkit.getOnlinePlayers().size();
+                main.plugin.config.set("onlinePlayers", players);
+                main.plugin.saveConfig();
+            }
+        }, 0L);
+        return main.plugin.config.getInt("onlinePlayers");
     }
 
     public void increaseRemainingPlayersDay() {
