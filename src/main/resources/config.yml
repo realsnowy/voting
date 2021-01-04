@@ -1,0 +1,12 @@
+world: world
+
+dayVoteMessage: "§aNew vote for day on §2%s, %s more needed! §aVote with /day"
+sunVoteMessage: "§aNew vote for sun on §2%s, %s more needed! §aVote with /sun"
+
+daySuccessMessage: "§aSay hello to the new day on §2%s"
+sunSuccessMessage: "§aSay hello to the sun on §2%s"
+
+dayNotReadyMessage: "§cWait until night!"
+sunNotReadyMessage: "§cIt's already sunny!"
+
+alreadyVotedMessage: "§cYou've already voted!"

@@ -1,0 +1,12 @@
+name: Voting
+version: ${project.version}
+main: tf.justdisablevac.voting.Voting
+api-version: 1.16
+authors: [ snowy ]
+description: Time/Weather voting
+
+commands:
+  day:
+    usage: /day
+  sun:
+    usage: /sun
